@@ -1,6 +1,8 @@
 package cmd_test
 
 import (
+	"net/http"
+
 	"code.cloudfoundry.org/uaa-cli/cmd"
 	"code.cloudfoundry.org/uaa-cli/config"
 	. "github.com/onsi/ginkgo"
@@ -8,7 +10,6 @@ import (
 	. "github.com/onsi/gomega/gbytes"
 	. "github.com/onsi/gomega/gexec"
 	. "github.com/onsi/gomega/ghttp"
-	"net/http"
 )
 
 var _ = Describe("DeleteClient", func() {
@@ -18,7 +19,7 @@ var _ = Describe("DeleteClient", func() {
 		  "resource_ids" : [ "none" ],
 		  "authorized_grant_types" : [ "client_credentials" ],
 		  "redirect_uri" : [ "http://ant.path.wildcard/**/passback/*", "http://test1.com" ],
-		  "autoapprove" : [ "true" ],
+		  "autoapprove" : true,
 		  "authorities" : [ "clients.read", "clients.write" ],
 		  "token_salt" : "1SztLL",
 		  "allowedproviders" : [ "uaa", "ldap", "my-saml-provider" ],

@@ -8,4 +8,5 @@
 
 [[constraint]]
   name = "github.com/cloudfoundry-community/go-uaa"
-  branch = "master"
+  branch = "autoapprove-bool"
+  source = "https://github.com/drnic/go-uaa.git"

@@ -32,7 +32,7 @@ var (
 	clientSecret         string
 	authorizedGrantTypes string
 	authorities          string
-	autoapprove          string
+	autoapprove          bool
 	accessTokenValidity  int64
 	refreshTokenValidity int64
 	displayName          string

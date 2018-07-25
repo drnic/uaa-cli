@@ -19,7 +19,7 @@ const clientResponse string = `{
 	"resource_ids" : [ "none" ],
 	"authorized_grant_types" : [ "client_credentials" ],
 	"redirect_uri" : [ "http://ant.path.wildcard/**/passback/*", "http://test1.com" ],
-	"autoapprove" : [ "true" ],
+	"autoapprove" : true,
 	"authorities" : [ "clients.read", "clients.write" ],
 	"token_salt" : "1SztLL",
 	"allowedproviders" : [ "uaa", "ldap", "my-saml-provider" ],

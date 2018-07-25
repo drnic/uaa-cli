@@ -27,7 +27,7 @@ type Client struct {
 	Scope                []string `json:"scope,omitempty"`
 	ResourceIDs          []string `json:"resource_ids,omitempty"`
 	Authorities          []string `json:"authorities,omitempty"`
-	AutoApprove          []string `json:"autoapprove,omitempty"`
+	AutoApprove          bool     `json:"autoapprove,omitempty"`
 	AccessTokenValidity  int64    `json:"access_token_validity,omitempty"`
 	RefreshTokenValidity int64    `json:"refresh_token_validity,omitempty"`
 	AllowedProviders     []string `json:"allowedproviders,omitempty"`

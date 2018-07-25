@@ -23,13 +23,13 @@ func UpdateClientValidations(cfg config.Config, args []string, clientSecret stri
 	return nil
 }
 
-func UpdateClientCmd(api *uaa.API, clientId, displayName, authorizedGrantTypes, authorities, autoapprove, redirectUri, scope string, accessTokenValidity, refreshTokenValidity int64) error {
+func UpdateClientCmd(api *uaa.API, clientId, displayName, authorizedGrantTypes, authorities, redirectUri, scope string, accessTokenValidity, refreshTokenValidity int64, autoapprove bool) error {
 	toUpdate := uaa.Client{
 		ClientID:             clientId,
 		DisplayName:          displayName,
 		AuthorizedGrantTypes: arrayify(authorizedGrantTypes),
 		Authorities:          arrayify(authorities),
-		AutoApprove:          arrayify(autoapprove),
+		AutoApprove:          autoapprove,
 		RedirectURI:          arrayify(redirectUri),
 		Scope:                arrayify(scope),
 		AccessTokenValidity:  accessTokenValidity,
@@ -53,7 +53,7 @@ var updateClientCmd = &cobra.Command{
 		NotifyValidationErrors(UpdateClientValidations(GetSavedConfig(), args, clientSecret), cmd, log)
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		NotifyErrorsWithRetry(UpdateClientCmd(GetAPIFromSavedTokenInContext(), args[0], displayName, authorizedGrantTypes, authorities, autoapprove, redirectUri, scope, accessTokenValidity, refreshTokenValidity), log)
+		NotifyErrorsWithRetry(UpdateClientCmd(GetAPIFromSavedTokenInContext(), args[0], displayName, authorizedGrantTypes, authorities, redirectUri, scope, accessTokenValidity, refreshTokenValidity, autoapprove), log)
 	},
 }
 
@@ -66,7 +66,7 @@ func init() {
 
 	updateClientCmd.Flags().StringVarP(&authorizedGrantTypes, "authorized_grant_types", "", "", "list of grant types allowed with this client.")
 	updateClientCmd.Flags().StringVarP(&authorities, "authorities", "", "", "scopes requested by client during client_credentials grant")
-	updateClientCmd.Flags().StringVarP(&autoapprove, "autoapprove", "", "", "Scopes that do not require user approval")
+	updateClientCmd.Flags().BoolVarP(&autoapprove, "autoapprove", "", false, "Scopes do not require user approval")
 	updateClientCmd.Flags().StringVarP(&scope, "scope", "", "", "scopes requested by client during authorization_code, implicit, or password grants")
 	updateClientCmd.Flags().Int64VarP(&accessTokenValidity, "access_token_validity", "", 0, "the time in seconds before issued access tokens expire")
 	updateClientCmd.Flags().Int64VarP(&refreshTokenValidity, "refresh_token_validity", "", 0, "the time in seconds before issued refrsh tokens expire")

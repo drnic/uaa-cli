@@ -21,7 +21,7 @@ var _ = Describe("UpdateClient", func() {
 	  "redirect_uri" : [ "http://localhost:8080/*" ],
 	  "authorities" : [ "notifications.write", "notifications.read" ],
 	  "token_salt" : "",
-	  "autoapprove" : ["true"],
+	  "autoapprove" : true,
 	  "allowedproviders" : [ "uaa", "ldap", "my-saml-provider" ],
 	  "name" : "Notifier Client"
 	}`
